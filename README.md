@@ -48,26 +48,130 @@ All data processing scripts are organized inside the [sale_sql_queries folder](/
 ### 2. General Business Health
 * **File:** `2_Total_financial_health_of_the_business.sql`
 * **Purpose:** Calculates high-level executive KPIs including **Total Revenue**, **Total Cost**, and **Total Net Profit** across the entire lifetime of the dataset to evaluate global business performance.
+```sql
+SELECT 
+    TO_CHAR(SUM("Total_Revenue"), '$99,999,999,999,99') AS GLOBAL_REVENUE,
+    TO_CHAR(SUM("Total_Cost"), '$99,999,999,999,99') AS GLOBAL_COST,
+    TO_CHAR(SUM("Total_Profit"), '$99,999,999,999,99') AS GLOBAL_PROFIT,
+    ROUND((SUM("Total_Profit") / SUM("Total_Revenue")) * 100, 2) AS PROFIT_MARGIN
+
+FROM 
+sales_table;
+```
+
 
 ### 3. Product & Inventory Optimization
 * **File:** `3_Most_Profitable_Item_Type.sql`
 * **Purpose:** Aggregates total profit grouped by item types (e.g., Cosmetics, Clothes, Office Supplies) to pinpoint which product categories drive the highest profit margins and should receive more marketing focus.
 
+```sql
+SELECT
+    sales_table."Item_Type",
+TO_CHAR(SUM(sales_table."Units_Sold"), 'FM99G999G999') As total_unit_sold,
+TO_CHAR(SUM(sales_table."Total_Profit"),'$99,999,999,999,99') AS Total_Profit
+
+FROM  sales_table
+GROUP BY
+    sales_table."Item_Type"
+ORDER BY Total_Profit DESC;
+```
+
 ### 4. Geographic & Regional Trends
 * **File:** `4_Performance_by_Region.sql`
 * **Purpose:** Breaks down sales volume and total margins by global regions (such as Sub-Saharan Africa, Europe, Asia). This identifies our strongest geographic strongholds and maps out underperforming regional markets.
+
+```sql
+SELECT 
+    sales_table."Region",
+    TO_CHAR(SUM("Total_Profit"), '$99,999,999,999,99') AS Total_Profit,
+    ROUND((SUM("Total_Profit") / SUM("Total_Revenue")) * 100, 2) AS PROFIT_MARGIN
+FROM sales_table
+GROUP BY sales_table."Region"
+ORDER BY PROFIT_MARGIN DESC;
+```
 
 ### 5. Historical Growth Tracking
 * **File:** `5_YoY_Growth.sql`
 * **Purpose:** Utilizes advanced window functions (`LAG()`, `LEAD()`) to calculate **Year-over-Year (YoY) Growth Rates**. This determines whether the company's financial trajectories are accelerating or slowing down over time.
 
+ ```sql
+    /*IV- YEAR - TO - YEAR GROWTH :
+ IS THE COMPANY GROWING OVER ITS PROFIT OVER OVER YEARS, OR DROPPING ?
+    1- CREATE 2 NEW COLUMNS "Sales_year , Sales_month"
+    2- EXTRACT MONTH/YEAR/
+    3- Calculate YoY GROWTH*/
+
+*/
+-- add cloumn sales_year and sales_month
+ALTER TABLE sales_table
+    ADD COLUMN sales_year INT,
+    ADD COLUMN sales_Month INT;
+
+-- load the columns with data 
+UPDATE sales_table
+SET 
+        sales_year =  EXTRACT(YEAR FROM "Order_Date"),
+        sales_month = EXTRACT(MONTH FROM "Order_Date");
+
+-- Calculate YOY Sales 
+
+WITH MonthlySales AS (
+    SELECT 
+        sales_year,
+        sales_month,
+        SUM("Total_Revenue") AS current_sales
+    FROM sales_table
+    GROUP BY sales_year, sales_month
+)
+SELECT 
+    sales_year,
+    sales_month,
+    -- 1. Format current sales nicely for presentation
+    TO_CHAR(current_sales, '$999,999,999,999') AS current_year_sales,
+    
+    -- 2. Grab the sales from exactly 12 months ago
+    LAG(current_sales, 12) OVER(ORDER BY sales_year, sales_month) AS previous_year_sales,
+    
+    -- 3. Calculate YoY Growth Percentage
+    ROUND(
+        ((current_sales - LAG(current_sales, 12) OVER(ORDER BY sales_year, sales_month)) 
+        / LAG(current_sales, 12) OVER(ORDER BY sales_year, sales_month)) * 100, 
+        2
+    ) || '%' AS yoy_growth_percentage
+
+FROM MonthlySales
+ORDER BY sales_year DESC, sales_month DESC;
+```
+
+
 ### 6. Deep-Dive Seasonal Analysis
 * **File:** `6_May_Profit 2016 vs 2017.sql`
 * **Purpose:** Performs a localized comparative analysis isolating specific calendar periods (May 2016 vs. May 2017) to study short-term variance, seasonal spikes, or anomalies in customer purchasing behavior.
 
+
+
+
+
+
+
+
 ### 7. Logistics & Supply Chain Efficiency
 * **File:** `7_Avr_delivery time vs Max_delivery_time.sql`
 * **Purpose:** Shifts focus to operations by computing metrics based on order dates and ship dates. It compares average delivery times against maximum delays to flag supply chain bottlenecks.
+```sql
+SELECT
+   "Item_Type",
+   ROUND(AVG(delivery_time), 2) AS Avg_delivery_time,
+   MAX(delivery_time) AS MaX_delivery_time
+    FROM sales_table
+    GROUP BY "Item_Type"
+    ORDER BY Avg_delivery_time ASC,
+    MaX_delivery_time ;
+
+
+SELECT *
+FROM sales_table;
+```
 
 ---
 
