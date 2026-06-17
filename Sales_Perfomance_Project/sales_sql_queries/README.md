@@ -6,14 +6,28 @@ Welcome to my Sales Performance Analysis portfolio project! This project explore
 The goal of this analysis is to demonstrate how advanced SQL workflows can transform raw transactional records into actionable strategic business intelligence.
 
 ---
-# Background
+# 🗺️ Background
+Driven by a desire to practice advanced SQL querying and real-world business intelligence, this portfolio project simulates the role of a Lead Data Analyst. The goal is to streamline complex sales data into actionable strategies—helping stakeholders easily pinpoint **high-growth regions**, **identify top-performing products**, and **optimize supply chain timelines**.
 
+The analysis is built on a comprehensive **sales dataset featuring regions, item types, sales channels, order dates, and financial metrics (revenue, cost, and profit)**.
 
+---
 
+## ❓ The Questions I Wanted to Answer Through My SQL Queries:
 
+1. *Database Setup:* How do we properly structure and import the raw sales records? 
 
+2. *Business Health:* What is the total financial health of the business in terms of overall revenue and net profit? 
 
+3.  Which item types stand out as the most profitable? 
 
+4.  How does sales performance vary across different global regions? 
+
+5. *Growth Trends:* What is our Year-over-Year (YoY) growth status? 
+
+6. *Seasonal Deep-Dive:* How do profits compare specifically between May 2016 and May 2017? 
+
+7. *Logistics Efficiency:* What does the gap look like between our average delivery times and maximum delivery times? 
 
 ---
 # 🛠️ Tools & Technologies Used
@@ -61,3 +75,5 @@ All data processing scripts are organized inside the [sale_sql_queries folder](/
 * **Time-Series Analysis:** Querying dates, extracting years/months, and comparing historical performance periods.
 * **Window Functions:** Employing statistical ranking and offset fields to build financial trend models without altering raw tables.
 * **Aggregations & Filters:** Mastering structural clauses (`GROUP BY`, `HAVING`, mathematical operators) to compress 10,000 distinct data rows into clear executive summaries.
+
+# Conclusion
