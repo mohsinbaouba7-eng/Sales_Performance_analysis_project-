@@ -130,6 +130,7 @@ ORDER BY Total_Profit DESC;
  The most profitable Item_type is
 "HOUSEHOLD", It is leading by $7,187,363,61 of Profit with 4336803 units sold.
 <img src= "Sales_Performance_Project/assets/Most profitable item.jpeg" width="85%">
+
 *Bar Graph of the Most profitable Item sold; ChatGPT genetated this from my SQL query results*
 
 ### 4. Geographic & Regional Trends
