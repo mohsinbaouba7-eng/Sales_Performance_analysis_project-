@@ -43,15 +43,14 @@ SET delivery_time = "Ship_Date" - "Order_Date";
 SELECT *
   FROM sales_table;
 
+
+
+
+
+
 SELECT 
       column_name, data_type, character_maximum_length
    FROM information_schema.columns
    WHERE table_name = 'sales_table';
 
 
-
-
-
-
-
-    -- 

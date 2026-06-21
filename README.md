@@ -128,6 +128,9 @@ GROUP BY
 ORDER BY Total_Profit DESC;
 ```
 
+![Most Profitible Item](<Sales_Performance_Project/assets/Most profitable item.jpeg>) 
+*Bar Graph of the Most profitable Item sold; ChatGPT genetated this from my SQL query results*
+
 ### 4. Geographic & Regional Trends
 * **File:** `4_Performance_by_Region.sql`
 * **Purpose:** Breaks down sales volume and total margins by global regions (such as Sub-Saharan Africa, Europe, Asia). This identifies our strongest geographic strongholds and maps out underperforming regional markets.
