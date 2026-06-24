@@ -178,7 +178,7 @@ GROUP BY "Country"
 ORDER BY SUM("Total_Revenue") DESC
 LIMIT 5;
 ```
-of the top 5 highest countries in terms of Total Revnue we have TAIWAN leading by 113M Follwed by GRENADA 107M 
+Of the top 5 highest countries in terms of Total Revnue, TAIWAN leading by 113M Follwed by GRENADA 107M. These 2 countries serve as primary commercial strongholds.
 
 | Country | total_revenue |
 | :--- | :--- |
@@ -188,12 +188,12 @@ of the top 5 highest countries in terms of Total Revnue we have TAIWAN leading b
 | Kiribati | $ 99,076,325 |
 | Bangladesh | $ 97,386,350 |
 
-
 ### 6. Historical Growth Tracking
 * **File:** `5_YoY_Growth.sql`
 * **Purpose:** Utilizes advanced window functions (`LAG()`, `LEAD()`) to calculate **Year-over-Year (YoY) Growth Rates**. This determines whether the company's financial trajectories are accelerating or slowing down over time.
 
  ```sql
+
     /*IV- YEAR - TO - YEAR GROWTH :
  IS THE COMPANY GROWING OVER ITS PROFIT OVER OVER YEARS, OR DROPPING ?
     1- CREATE 2 NEW COLUMNS "Sales_year , Sales_month"
@@ -241,6 +241,7 @@ SELECT
 FROM MonthlySales
 ORDER BY sales_year DESC, sales_month DESC;
 ```
+
 | sales_year | sales_month | current_year_sales | previous_year_sales | yoy_growth_percentage |
 | :---: | :---: | :--- | :--- | :---: |
 | **2017** | 7 | $ 170,797,235 | 169523562.82 | 0.75% |
@@ -328,5 +329,15 @@ FROM sales_table;
 * **Aggregations & Filters:** Mastering structural clauses (`GROUP BY`, `HAVING`, mathematical operators) to compress 10,000 distinct data rows into clear executive summaries.
 
 # Conclusion
+
+
+
+
+
+
+
+
+
+
 
 </div>

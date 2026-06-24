@@ -29,7 +29,3 @@ WHERE sales_month = 5;
 
 
 
-SELECT*
-FROM sales_table;
-
-
