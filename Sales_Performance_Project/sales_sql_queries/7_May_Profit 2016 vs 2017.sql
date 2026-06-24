@@ -9,7 +9,7 @@ SELECT
     To_CHAR(
         SUM(CASE WHEN sales_year = 2017 THEN "Total_Profit" END) - 
         SUM(CASE WHEN sales_year = 2016 THEN "Total_Profit" END),
-    '$99,999,999,999,99' ) AS net_diefference,
+    '$99,999,999,999,99' ) AS net_profit_growth,
 
     ROUND(
     (SUM(CASE WHEN sales_year = 2017 THEN "Total_Profit" END) / 

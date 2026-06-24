@@ -241,7 +241,6 @@ SELECT
 FROM MonthlySales
 ORDER BY sales_year DESC, sales_month DESC;
 ```
-
 | sales_year | sales_month | current_year_sales | previous_year_sales | yoy_growth_percentage |
 | :---: | :---: | :--- | :--- | :---: |
 | **2017** | 7 | $ 170,797,235 | 169523562.82 | 0.75% |
@@ -289,6 +288,14 @@ SELECT*
 FROM sales_table;
 
 ```
+*Total profit for the month of May grew by +$89,034.27 year-over-year, showing an impressive 21.5% increase in absolute baseline returns. This indicates a successful push in sales volume or market expansion during 2017*
+| profit_may_2017 | profit_may_2016 | net_profit_growth | profit_margin_2017 | profit_margin_2016 |
+| :--- | :--- | :--- | :--- | :--- |
+| $503,359.56 |$ 414,325.30 | $ 89,034.27 | 30.44 | 31.81 |
+
+**Conclusion:** *This pattern suggests that the 2017 growth was driven by high-volume sales of slightly lower-margin items, or potentially due to rising operational/unit costs. The business successfully traded a tiny bit of operational efficiency (margin) to capture a significantly larger pool of actual cash (total profit).*
+
+
 
 ### 8. Logistics & Supply Chain Efficiency
 * **File:** `7_Avr_delivery time vs Max_delivery_time.sql`
@@ -302,7 +309,6 @@ SELECT
     GROUP BY "Item_Type"
     ORDER BY Avg_delivery_time ASC,
     MaX_delivery_time ;
-
 
 SELECT *
 FROM sales_table;
